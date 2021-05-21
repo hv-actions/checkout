@@ -1,6 +1,4 @@
-<p align="center">
-  <a href="https://github.com/hv-actions/checkout"><img alt="GitHub Actions status" src="https://github.com/hv-actions/checkout/workflows/test-local/badge.svg"></a>
-</p>
+[![Build and Test](https://github.com/hv-actions/checkout/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/hv-actions/checkout/actions/workflows/test.yml)
 
 # Hitachi Vantara Checkout v2
 
