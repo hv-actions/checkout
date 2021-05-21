@@ -75,10 +75,12 @@ jobs:
       - name: Checkout LFS
         uses: ./
         with:
-          repository: actions/checkout # hardcoded, otherwise doesn't work from a fork
+          repositories: | 
+            - hv-actions/checkout
           ref: test-data/v2/lfs
           path: lfs/
           lfs: true
+          token: ${{ secrets.HV_ACTIONS_GIT_TOKEN }}
       - name: Verify LFS
         shell: bash
         run: __test__/verify-lfs.sh
