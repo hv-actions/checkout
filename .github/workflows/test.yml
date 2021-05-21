@@ -71,19 +71,6 @@ jobs:
         shell: bash
         run: __test__/verify-side-by-side.sh
 
-      # LFS
-      - name: Checkout LFS
-        uses: ./
-        with:
-          repositories: | 
-            - actions/checkout
-          ref: test-data/v2/lfs
-          path: lfs/
-          lfs: true
-      - name: Verify LFS
-        shell: bash
-        run: __test__/verify-lfs.sh
-
       # Submodules false
       - name: Checkout submodules false
         uses: ./
