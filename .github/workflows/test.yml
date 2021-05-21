@@ -76,11 +76,10 @@ jobs:
         uses: ./
         with:
           repositories: | 
-            - hv-actions/checkout
+            - actions/checkout
           ref: test-data/v2/lfs
           path: lfs/
           lfs: true
-          token: ${{ secrets.HV_ACTIONS_GIT_TOKEN }}
       - name: Verify LFS
         shell: bash
         run: __test__/verify-lfs.sh
