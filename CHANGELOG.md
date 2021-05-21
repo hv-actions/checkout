@@ -1,5 +1,5 @@
 # Changelog
 
-## v1
+## v2
 
 Initial Release of the Hitachi Vantara Checkout Action
