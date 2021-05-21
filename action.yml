@@ -6,7 +6,8 @@ inputs:
       List of Repository names with owner to checkout. For example, 
       - actions/checkout
       - actions/slack-action
-    default: ${{ github.repository }}
+    default: |
+      - ${{ github.repository }}
   ref:
     description: >
       The branch, tag or SHA to checkout. When checking out the repository that
