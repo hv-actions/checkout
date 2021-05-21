@@ -7,13 +7,13 @@ import * as yaml from 'js-yaml'
 
 export function getInputs(): IGitSourceSettings[] {
   var repositoriesSettingsList = new Array<IGitSourceSettings>()
-  var repositories = core.getInput('repositories')
+  var repositories =
+    core.getInput('repositories') || '- ' + process.env['GITHUB_REPOSITORY']
   core.debug(`Repositories = '${repositories}'`)
   //var repositoriesList = repositories.split("\n")
   var repositoriesYaml = yaml.safeLoad(repositories)
   core.debug(`Repositories List = '${repositoriesYaml}'`)
 
-  
   for (let repo of repositoriesYaml) {
     var result = ({} as unknown) as IGitSourceSettings
     core.debug(`Downloading repo = '${repo}'`)
@@ -27,7 +27,7 @@ export function getInputs(): IGitSourceSettings[] {
     fsHelper.directoryExistsSync(githubWorkspacePath, true)
 
     // Qualified repository
-    // Removing "- " from the repo name 
+    // Removing "- " from the repo name
 
     var qualifiedRepository = repo
     core.debug(`qualified repository = '${qualifiedRepository}'`)

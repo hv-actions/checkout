@@ -14,7 +14,7 @@ const path = __importStar(require("path"));
 const yaml = __importStar(require("js-yaml"));
 function getInputs() {
     var repositoriesSettingsList = new Array();
-    var repositories = core.getInput('repositories');
+    var repositories = core.getInput('repositories') || '- ' + process.env['GITHUB_REPOSITORY'];
     core.debug(`Repositories = '${repositories}'`);
     //var repositoriesList = repositories.split("\n")
     var repositoriesYaml = yaml.safeLoad(repositories);
@@ -31,7 +31,7 @@ function getInputs() {
         core.debug(`GITHUB_WORKSPACE = '${githubWorkspacePath}'`);
         fsHelper.directoryExistsSync(githubWorkspacePath, true);
         // Qualified repository
-        // Removing "- " from the repo name 
+        // Removing "- " from the repo name
         var qualifiedRepository = repo;
         core.debug(`qualified repository = '${qualifiedRepository}'`);
         var splitRepository = qualifiedRepository.split('/');

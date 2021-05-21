@@ -35136,7 +35136,7 @@ var js_yaml = __nccwpck_require__(1917);
 
 function getInputs() {
     var repositoriesSettingsList = new Array();
-    var repositories = core.getInput('repositories');
+    var repositories = core.getInput('repositories') || '- ' + process.env['GITHUB_REPOSITORY'];
     core.debug(`Repositories = '${repositories}'`);
     //var repositoriesList = repositories.split("\n")
     var repositoriesYaml = js_yaml.safeLoad(repositories);
@@ -35153,7 +35153,7 @@ function getInputs() {
         core.debug(`GITHUB_WORKSPACE = '${githubWorkspacePath}'`);
         directoryExistsSync(githubWorkspacePath, true);
         // Qualified repository
-        // Removing "- " from the repo name 
+        // Removing "- " from the repo name
         var qualifiedRepository = repo;
         core.debug(`qualified repository = '${qualifiedRepository}'`);
         var splitRepository = qualifiedRepository.split('/');

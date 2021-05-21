@@ -26,15 +26,12 @@ Refer [here](https://github.com/actions/checkout/blob/v2/README.md) for Github C
 
 <!-- start usage -->
 ```yaml
-- uses: hv-actions/checkout@v1
+- uses: actions/checkout@v2
   with:
-    # List of Repository names with owner to checkout. For example, 
-    # - actions/checkout
+    # List of Repository names with owner to checkout. For example, - actions/checkout
     # - actions/slack-action
     # Default: ${{ github.repository }}
-    repositories: |
-      - Org/repo-1
-      - Org/repo-2
+    repositories: ''
 
     # The branch, tag or SHA to checkout. When checking out the repository that
     # triggered a workflow, this defaults to the reference or SHA for that event.
