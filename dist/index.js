@@ -35226,6 +35226,9 @@ function getInputs() {
                 result.ref = '';
             }
         }
+        else {
+            result.ref = ref;
+        }
         core.debug(`ref = '${result.ref}'`);
         core.debug(`commit = '${result.commit}'`);
         // Clean

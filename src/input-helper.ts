@@ -120,6 +120,8 @@ export function getInputs(): IGitSourceSettings[] {
         result.commit = result.ref
         result.ref = ''
       }
+    } else {
+      result.ref = ref
     }
     core.debug(`ref = '${result.ref}'`)
     core.debug(`commit = '${result.commit}'`)
