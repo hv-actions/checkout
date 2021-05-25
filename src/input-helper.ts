@@ -29,12 +29,11 @@ export function getInputs(): IGitSourceSettings[] {
     // Qualified repository
     var ref = ''
     if (repo.includes('@')) {
-      var qualifiedRepository = repo.split("@")[0]
-      ref = repo.split("@")[1]
-    }
-    else{
+      var qualifiedRepository = repo.split('@')[0]
+      ref = repo.split('@')[1]
+    } else {
       var qualifiedRepository = repo
-    }  
+    }
 
     // if (repo.includes('@')) {
     //   result.ref = repo.split('@')[1]
@@ -97,7 +96,7 @@ export function getInputs(): IGitSourceSettings[] {
     core.debug(`Custom Repository Path: '${result.repositoryPath}'`)
 
     // Workflow repository?
-    if(ref == ''){
+    if (ref === '') {
       var isWorkflowRepository =
         qualifiedRepository.toUpperCase() ===
         `${github.context.repo.owner}/${github.context.repo.repo}`.toUpperCase()
@@ -121,7 +120,7 @@ export function getInputs(): IGitSourceSettings[] {
         result.commit = result.ref
         result.ref = ''
       }
-    }  
+    }
     core.debug(`ref = '${result.ref}'`)
     core.debug(`commit = '${result.commit}'`)
 

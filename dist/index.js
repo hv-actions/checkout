@@ -35153,32 +35153,39 @@ function getInputs() {
         core.debug(`GITHUB_WORKSPACE = '${githubWorkspacePath}'`);
         directoryExistsSync(githubWorkspacePath, true);
         // Qualified repository
-        var qualifiedRepository = repo;
+        var ref = '';
         if (repo.includes('@')) {
-            result.ref = repo.split('@')[1];
-            repo = repo.split('@')[0];
+            var qualifiedRepository = repo.split('@')[0];
+            ref = repo.split('@')[1];
         }
         else {
-            // Workflow repository?
-            var isWorkflowRepository = qualifiedRepository.toUpperCase() ===
-                `${github.context.repo.owner}/${github.context.repo.repo}`.toUpperCase();
-            if (!result.ref) {
-                if (isWorkflowRepository) {
-                    result.ref = github.context.ref;
-                    result.commit = github.context.sha;
-                    // Some events have an unqualifed ref. For example when a PR is merged (pull_request closed event),
-                    // the ref is unqualifed like "main" instead of "refs/heads/main".
-                    if (result.commit && result.ref && !result.ref.startsWith('refs/')) {
-                        result.ref = `refs/heads/${result.ref}`;
-                    }
-                }
-            }
-            // SHA?
-            else if (result.ref.match(/^[0-9a-fA-F]{40}$/)) {
-                result.commit = result.ref;
-                result.ref = '';
-            }
+            var qualifiedRepository = repo;
         }
+        // if (repo.includes('@')) {
+        //   result.ref = repo.split('@')[1]
+        //   repo = repo.split('@')[0]
+        // } else {
+        //   // Workflow repository?
+        //   var isWorkflowRepository =
+        //     qualifiedRepository.toUpperCase() ===
+        //     `${github.context.repo.owner}/${github.context.repo.repo}`.toUpperCase()
+        //   if (!result.ref) {
+        //     if (isWorkflowRepository) {
+        //       result.ref = github.context.ref
+        //       result.commit = github.context.sha
+        //       // Some events have an unqualifed ref. For example when a PR is merged (pull_request closed event),
+        //       // the ref is unqualifed like "main" instead of "refs/heads/main".
+        //       if (result.commit && result.ref && !result.ref.startsWith('refs/')) {
+        //         result.ref = `refs/heads/${result.ref}`
+        //       }
+        //     }
+        //   }
+        //   // SHA?
+        //   else if (result.ref.match(/^[0-9a-fA-F]{40}$/)) {
+        //     result.commit = result.ref
+        //     result.ref = ''
+        //   }
+        // }
         core.debug(`qualified repository = '${qualifiedRepository}'`);
         var splitRepository = qualifiedRepository.split('/');
         if (splitRepository.length !== 2 ||
@@ -35196,28 +35203,29 @@ function getInputs() {
             throw new Error(`Repository path '${result.repositoryPath}' is not under '${githubWorkspacePath}'`);
         }
         core.debug(`Custom Repository Path: '${result.repositoryPath}'`);
-        // // Workflow repository?
-        // var isWorkflowRepository =
-        //   qualifiedRepository.toUpperCase() ===
-        //   `${github.context.repo.owner}/${github.context.repo.repo}`.toUpperCase()
-        // // Source branch, source version
-        // result.ref = core.getInput('ref')
-        // if (!result.ref) {
-        //   if (isWorkflowRepository) {
-        //     result.ref = github.context.ref
-        //     result.commit = github.context.sha
-        //     // Some events have an unqualifed ref. For example when a PR is merged (pull_request closed event),
-        //     // the ref is unqualifed like "main" instead of "refs/heads/main".
-        //     if (result.commit && result.ref && !result.ref.startsWith('refs/')) {
-        //       result.ref = `refs/heads/${result.ref}`
-        //     }
-        //   }
-        // }
-        // SHA?
-        // else if (result.ref.match(/^[0-9a-fA-F]{40}$/)) {
-        //   result.commit = result.ref
-        //   result.ref = ''
-        // }
+        // Workflow repository?
+        if (ref === '') {
+            var isWorkflowRepository = qualifiedRepository.toUpperCase() ===
+                `${github.context.repo.owner}/${github.context.repo.repo}`.toUpperCase();
+            // Source branch, source version
+            result.ref = core.getInput('ref');
+            if (!result.ref) {
+                if (isWorkflowRepository) {
+                    result.ref = github.context.ref;
+                    result.commit = github.context.sha;
+                    // Some events have an unqualifed ref. For example when a PR is merged (pull_request closed event),
+                    // the ref is unqualifed like "main" instead of "refs/heads/main".
+                    if (result.commit && result.ref && !result.ref.startsWith('refs/')) {
+                        result.ref = `refs/heads/${result.ref}`;
+                    }
+                }
+            }
+            // SHA?
+            else if (result.ref.match(/^[0-9a-fA-F]{40}$/)) {
+                result.commit = result.ref;
+                result.ref = '';
+            }
+        }
         core.debug(`ref = '${result.ref}'`);
         core.debug(`commit = '${result.commit}'`);
         // Clean
