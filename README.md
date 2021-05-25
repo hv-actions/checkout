@@ -23,12 +23,13 @@ Refer [here](https://github.com/actions/checkout/blob/v2/README.md) for Github C
     # Default: - ${{ github.repository }}
 
     repositories: |
-      - hv-actions/slack-action
+      - hv-actions/slack-action@v1
       - hv-actions/aws-action
 
     # The branch, tag or SHA to checkout. When checking out the repository that
     # triggered a workflow, this defaults to the reference or SHA for that event.
     # Otherwise, uses the default branch.
+    # Avoided if used '@' in the repositories section otherwise uses default branch 
     ref: ''
 
     # Personal access token (PAT) used to fetch the repository. The PAT is configured
