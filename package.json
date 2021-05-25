@@ -4,7 +4,7 @@
   "description": "checkout action",
   "main": "src/main.ts",
   "scripts": {
-    "build": "tsc && ncc build && node dist/misc/generate-docs.js",
+    "build": "tsc && ncc build",
     "package": "ncc build --source-map --license licenses.txt",
     "format": "prettier --write '**/*.ts'",
     "format-check": "prettier --check '**/*.ts'",
