@@ -35161,31 +35161,6 @@ function getInputs() {
         else {
             var qualifiedRepository = repo;
         }
-        // if (repo.includes('@')) {
-        //   result.ref = repo.split('@')[1]
-        //   repo = repo.split('@')[0]
-        // } else {
-        //   // Workflow repository?
-        //   var isWorkflowRepository =
-        //     qualifiedRepository.toUpperCase() ===
-        //     `${github.context.repo.owner}/${github.context.repo.repo}`.toUpperCase()
-        //   if (!result.ref) {
-        //     if (isWorkflowRepository) {
-        //       result.ref = github.context.ref
-        //       result.commit = github.context.sha
-        //       // Some events have an unqualifed ref. For example when a PR is merged (pull_request closed event),
-        //       // the ref is unqualifed like "main" instead of "refs/heads/main".
-        //       if (result.commit && result.ref && !result.ref.startsWith('refs/')) {
-        //         result.ref = `refs/heads/${result.ref}`
-        //       }
-        //     }
-        //   }
-        //   // SHA?
-        //   else if (result.ref.match(/^[0-9a-fA-F]{40}$/)) {
-        //     result.commit = result.ref
-        //     result.ref = ''
-        //   }
-        // }
         core.debug(`qualified repository = '${qualifiedRepository}'`);
         var splitRepository = qualifiedRepository.split('/');
         if (splitRepository.length !== 2 ||
@@ -35197,6 +35172,9 @@ function getInputs() {
         result.repositoryName = splitRepository[1];
         // Repository path
         var parentRepositoryPath = core.getInput('path') || '.';
+        if (!parentRepositoryPath.endsWith('/')) {
+            parentRepositoryPath = parentRepositoryPath + '/';
+        }
         result.repositoryPath = parentRepositoryPath + splitRepository[1];
         result.repositoryPath = external_path_.resolve(githubWorkspacePath, result.repositoryPath);
         if (!(result.repositoryPath + external_path_.sep).startsWith(githubWorkspacePath + external_path_.sep)) {

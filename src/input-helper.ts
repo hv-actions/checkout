@@ -51,8 +51,8 @@ export function getInputs(): IGitSourceSettings[] {
 
     // Repository path
     var parentRepositoryPath = core.getInput('path') || '.'
-    if(!parentRepositoryPath.endsWith("/")){
-      parentRepositoryPath = parentRepositoryPath + "/"
+    if (!parentRepositoryPath.endsWith('/')) {
+      parentRepositoryPath = parentRepositoryPath + '/'
     }
     result.repositoryPath = parentRepositoryPath + splitRepository[1]
     result.repositoryPath = path.resolve(
