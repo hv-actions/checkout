@@ -7,7 +7,7 @@ Note: This Action is an improved version based on Github Checkout V2 to allow ch
 
 # What's new compared to Github Checkout V2
 
-- Checkout multiple repositories into the given path or $GITHUB_WORKSPACE
+- Checkout multiple repositories into the given path or $GITHUB_WORKSPACE/repository-name
 - Takes the list in YAML format.
 
 Refer [here](https://github.com/actions/checkout/blob/v2/README.md) for Github Checkout V2 documentation.
