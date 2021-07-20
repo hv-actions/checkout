@@ -1,4 +1,4 @@
-[![Build and Test](https://github.com/hv-actions/checkout/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/hv-actions/checkout/actions/workflows/test.yml)
+[![Build and Test](https://github.com/hv-actions/checkout/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/hv-actions/checkout/actions/workflows/test.yml)
 
 # Hitachi Vantara Checkout v2
 
