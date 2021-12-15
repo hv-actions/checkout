@@ -1,6 +1,6 @@
 import * as core from '@actions/core'
 import * as fs from 'fs'
-import * as gitAuthHelper from '../dist/git-auth-helper'
+import * as gitAuthHelper from '../lib/git-auth-helper'
 import * as io from '@actions/io'
 import * as os from 'os'
 import * as path from 'path'

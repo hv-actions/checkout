@@ -59,6 +59,7 @@ export function getInputs(): IGitSourceSettings[] {
       githubWorkspacePath,
       result.repositoryPath
     )
+    /* Commenting out to allow checkout to any path not under github workspace. For example, any mounted volume
     if (
       !(result.repositoryPath + path.sep).startsWith(
         githubWorkspacePath + path.sep
@@ -68,6 +69,7 @@ export function getInputs(): IGitSourceSettings[] {
         `Repository path '${result.repositoryPath}' is not under '${githubWorkspacePath}'`
       )
     }
+    */
     core.debug(`Custom Repository Path: '${result.repositoryPath}'`)
 
     // Workflow repository?
